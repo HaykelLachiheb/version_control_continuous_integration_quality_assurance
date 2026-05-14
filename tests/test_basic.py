@@ -1,5 +1,5 @@
 import pytest
-from calculator.basic import add, subtract, multiply, divide
+from calculator.basic import add, subtract, multiply, divide, average
 
 
 class TestBasicOperations:
@@ -30,3 +30,13 @@ class TestBasicOperations:
     def test_divide_by_zero(self):
         with pytest.raises(ValueError, match="Cannot divide by zero"):
             divide(5, 0)
+
+    def test_average(self):
+        assert average([1, 2, 3, 4, 5]) == 3
+        assert average([10]) == 10
+        assert average([1.5, 2.5]) == 2.0
+        assert average([-1, 0, 1]) == 0
+
+    def test_average_empty(self):
+        with pytest.raises(ValueError, match="Cannot compute average of an empty list"):
+            average([])
